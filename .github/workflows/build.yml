@@ -10,6 +10,11 @@ jobs:
     - name: Unzip Code
       run: unzip weatherai-pro.zip
       
+    - name: Fix AI Studio Code
+      run: |
+        sed -i 's/signingConfig = signingConfigs.getByName("debugConfig")//g' app/build.gradle.kts
+        cp .env.example .env
+        
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
@@ -27,4 +32,3 @@ jobs:
       with:
         name: WeatherAI-App
         path: app/build/outputs/apk/debug/app-debug.apk
-        
